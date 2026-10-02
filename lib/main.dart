@@ -1,4 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/
+material.dart';
+import 'package:image_picker/
+image_picker.dart';
 
 void main() {
   runApp(const VisionAIVideoApp());
@@ -60,10 +63,29 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 35),
 
             ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.image),
-              label: const Text('Image to Video'),
-            ),
+              onPressed: () async {
+                final ImagePicker picker = 
+              ImagePicker();
+
+                final XFile? image = await
+              picker.pickImage(
+                  source: ImageSource.gallery,
+                );
+
+                if (image != null &&
+              context.mounted) {
+              ScaffoldMessenger.of(context).sh
+              owSnackBar(
+                    const SnackBar(
+                      content: Text('Image
+              selected successfully!'),
+                    ),
+                  );
+                }
+              },
+            
+          
+            
 
             const SizedBox(height: 15),
 
