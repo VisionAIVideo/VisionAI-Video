@@ -2,6 +2,13 @@ import 'package:flutter/
 material.dart';
 import 'package:image_picker/
 image_picker.dart';
+import 'package:file_picker/
+file_picker.dart';
+import 'package:just_audio/
+just_audio.dart';
+
+final AudioPlayer audioPlayer = 
+AudioPlayer();
 
 void main() {
   runApp(const VisionAIVideoApp());
@@ -36,7 +43,7 @@ class HomePage extends StatelessWidget {
         title: const Text('VisionAI Video'),
         centerTitle: true,
       ),
-      body: Padding(
+      body: Padding (
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -98,10 +105,48 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 15),
 
             ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.music_note),
-              label: const Text('Add Music'),
-            ),
+              onPressed: () async {
+                final rsult = await 
+              FilePicker.platform.pickFiles(
+                  type: FileType.audio,
+                );
+
+                if (result != null && 
+              result.files.single.path != 
+              null) {
+                  final path = 
+              result.files.single.path!;
+
+                  try {
+                    await 
+              audioPlayer.setFilePath(path);
+                    await audioPlayer.play();
+
+                    if (context.mounted) {
+              ScaffoldMessenger.of(context).sh
+              owSnackBar(
+                        const SnackBar(
+                           content: Text('Music
+              is playing!'),
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+              ScaffoldMessenger.of(context).sh
+              owSnackBar(
+                        const SnackBar(
+                         content: Text('Could
+              not play this audio file.'),
+                        ),
+                      );
+                    }
+                  }
+                }
+              },
+              
+            
+            
 
             const SizedBox(height: 15),
 
