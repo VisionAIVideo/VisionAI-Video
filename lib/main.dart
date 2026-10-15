@@ -6,9 +6,15 @@ import 'package:file_picker/
 file_picker.dart';
 import 'package:just_audio/
 just_audio.dart';
+import 'package:video_player/
+video_player.dart';
+import 'package:flutter_tts/
+flutter_tts.dart';
 
-final AudioPlayer audioPlayer = 
-AudioPlayer();
+final AudioPlayer audioPlayer =
+ AudioPlayer();
+final FlutterTts flutterTts = 
+FlutterTts();
 
 void main() {
   runApp(const VisionAIVideoApp());
