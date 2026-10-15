@@ -103,10 +103,34 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 15),
 
             ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.edit),
-              label: const Text('AI Video Editor'),
-            ),
+              onPressed: () async {
+                final result = await 
+              FilePicker.platform.pickFiles(
+                  type: FileType.video,
+                );  
+
+                if (result != null &&
+              result.files.single.path != 
+              null) {
+                  final videoPath = 
+                  result.files.single.path!;
+ 
+               if (context.mounted) {
+                 Navigator.push(
+                   context,
+                   MaterialPageRoute(
+                     builder: (context) => 
+             VideoPreviewPage(
+                         videoPath: 
+             videoPath,
+                       ),
+                     ),
+                   );
+                 }
+               }
+             }, 
+              
+            
 
             const SizedBox(height: 15),
 
