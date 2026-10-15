@@ -151,10 +151,67 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 15),
 
             ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.record_voice_over),
-              label: const Text('AI Voiceover'),
-            ),
+              onPressed: () async {
+                final TextEditingController 
+              controller =
+              TextEditingController();
+
+                 final String? text = await
+              showDialog<String>(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('AI 
+              Voiceover'),
+                      content: TextField(
+                        controller: 
+              controller,
+                        maxLines: 5,
+                        decoration: const 
+              InputDecoration(
+                          hintText: 'Enter
+              your voiceover text...',
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => 
+              Navigator.pop(context),
+                          child: const
+              Text('Cancel'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () =>
+              Navigator.pop(context, 
+              controller.text),
+                          child: const 
+              Text('Speak'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+                if (text != null && 
+              text.trim().isNotEmpty) {
+                  await 
+              flutterTts.speak(text.trim());
+
+                  if (context.mounted) {
+
+              ScaffoldMessenger.of(context).sh
+              owSnackBar(
+                      const SnackBar(
+                        content:
+              Text('Voiceover is playing!'),
+                      ),
+                    );
+                  }
+                }
+              },
+              
+              
+            
 
             const SizedBox(height: 15),
 
