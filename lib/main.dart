@@ -246,13 +246,22 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 15),
 
             ElevatedButton.icon(
-              onPressed: () {},
-              icon: const Icon(Icons.video_library),
-              label: const Text('My Videos'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+              onPressed:
+              () {
+              ScaffoldMessenger.of(context).sh
+              owSnackBar(
+                  const SnackBar(
+                    content: Text('My Videos 
+              is comin),g soon!'),
+                  ),
+                );
+              },
+
+              
+            
+          
+        
+      
+    
+  
+
